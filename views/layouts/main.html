@@ -1,0 +1,53 @@
+<html>
+   <head>
+	   <title>{{title}}</title>
+	   {{>headers}}
+   </head>
+   <body>
+	  <header>
+	     <nav id="navbar_top" class="navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-primary">
+		 <div class="container-fluid">
+			 <a class="navbar-brand" href="/">Student Social Media</a>
+			 <form class="search-from" action="search">
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" id="query" name="query" placeholder="Images,#tags" aria-label="Search Images" aria-describedby="Search Images">
+					<div class="input-group-append">
+					   <button class="input-group-text"><i class="fa fa-search"></i></button>	
+					</div>
+				</div> 
+			 </form>
+		     <div id="main_nav">
+				 <ul class="nav navbar-nav navbar-right">
+					 {{#if loginId}}
+					      <li> <a class="nav-link" href="dashboard">Home</a></li>
+					      <li> <a class="nav-link" href="#">My Account</a></li>
+ 						  <li> <a class="nav-link" href="#" data-toggle="modal" data-target=".bs-example-modal-sm">Log Out</a></li>
+					   {{else}}
+						 <li class="nav-item"><a class="nav-link" href="login"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign in</a></li>
+						<li class="nav-item"><a class="nav-link" href="registration"><i class="fa fa-user" aria-hidden="true"></i> Sign Up</a></li>
+					 {{/if}}
+				 </ul>
+			 </div>
+		 </div> 
+	    </nav>
+	   </header>
+	   <div class="clearfix"></div>
+	   <!--Main Content-->
+	   <section>
+		 <div class="container main-container">
+		    {{{body}}}
+		 </div>
+	   </section>	   
+	   <!--End Main Content-->
+	   <!--Spinner-->
+	   <div class="spinner"></div>
+	   <div class="clearfix"></div>
+	  <footer>
+	    <ul>
+		  <li>&copy; 2021,Student Social Media</li>
+		</ul> 
+	  </footer> 
+	  <script src="js/handlebars.min.js"></script>
+  	  <script type="text/javascript" src="js/validator.js"></script>  
+   </body>
+</html>

@@ -1,0 +1,38 @@
+<div class="data-grid">	
+	  {{#each data}}
+		   <div class="card card-post">
+			  <img class="card-img-top" src="{{POST_DATA}}" alt="{{POST_TAG}}"/>
+			  <div class="card-block">
+				 <h4 class="card-title text-sm-12">{{POST_TAG}}</h4> 
+			  </div>
+			  <div class="card-footer">
+				 <div class="row">
+						 <div class="col-lg-3">
+							  <span>
+								<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+								{{#with VISITORS}} {{total_likes}} {{else}} 0 {{/with}} 
+							  </span>
+						  </div>
+						   <div class="col-lg-3">
+							  <span>
+								 <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+								  {{#with VISITORS}} {{total_dislikes}} {{else}} 0 {{/with}} 
+							  </span>
+							</div>
+							<div class="col-lg-3">
+							  <span>
+								 <i class="fa fa-comments" aria-hidden="true"></i>
+								 {{#with VISITORS}} {{total_comments}} {{else}} 0 {{/with}}
+							  </span>
+							</div>
+							<div class="col-lg-3">
+							  <span>
+								  <i class="fa fa-users" aria-hidden="true"></i>
+								  {{#with VISITORS}} {{total_comments}} {{else}} 0 {{/with}}
+							  </span>
+							</div>
+					   </div>	
+			  </div> 
+		   </div>
+	   {{/each}}
+</div>

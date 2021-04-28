@@ -1,0 +1,70 @@
+<form class="registration-form" method="post" action="/registration">
+	    <label class="header_title"><i class="fa fa-group"></i>Registration With Student Social Media</label>  
+		<div class="row">
+		  <div class="col-lg-12">
+			 <input type="text" value="{{user_name}}" name="user_name"  id="user_name" class="form-control" placeholder="Username" required>
+		  </div>
+	   </div>
+	   <div class="row">
+		  <div class="col-lg-12">
+			 <input type="text" value="{{email_id}}" name="email_id"  id="email_id" class="form-control" placeholder="Email" required>
+		  </div>
+	   </div>
+	   <div class="row">
+		  <div class="col-lg-12">
+			 <input type="password" name="password"  id="password" class="form-control" placeholder="Password" required>
+		  </div>
+	   </div>
+	   <div class="row">
+		  <div class="col-lg-12">
+			 <input type="password" name="retype_password"  id="retype_password" class="form-control" placeholder="ReType Password">
+		  </div>
+	   </div>
+	   <div class="row">
+		  <div class="col-lg-12">
+			 <input type="text" value="{{mobile_no}}" name="mobile_no"  id="mobile_no" class="form-control" placeholder="Mobile Number Ex:- +1 xxx-xxx-xx" required>
+		  </div>
+	   </div>
+	   <div class="row">
+	      <div class="col-lg-12">
+		     {{#if error}}
+			      <span class="warning"><i class="fa fa-times" aria-hidden="true"></i>{{error.message}}</span>
+	     		{{else}}
+	        	  {{#if message}}
+			         <span class="success"><i class="fa fa-check" aria-hidden="true"></i>{{message}}</span>
+			      {{/if}}
+	   	     {{/if}} 
+		  </div>
+	   </div>
+	    <div class="row">
+		  <div class="col-5 col-md-4">
+			 <button class="btn btn-primary submit">Sign Up</button>
+		  </div>
+	   </div>
+	   <div class="row">
+		  <div class="col-5 col-md-4">
+			  <span class="success">Exist Account <a href="/login">Login</a></span>
+		  </div>
+	   </div>	   
+</form>
+<!--</div>-->
+<script>
+<!--
+  $(document).ready(()=>{
+	  $("#email_id").blur((e)=>{
+		 if(!isValidEmail(e.target.value)){
+			 addError("#email_id","Enter Valid Email(Ex:-xxxx@gmail.com)");
+		 }else{
+			 removeError("#email_id");
+		 }
+	  })
+	  $("#retype_password").blur((e)=>{
+		  if(!isValidPassword($("#password").val(),$("#retype_password").val())){
+			   addError("#retype_password","Your passwords do not match!");
+		  }else{
+			   removeError("#retype_password");
+		  }
+	  });
+});
+//-->	
+</script>

@@ -1,0 +1,104 @@
+{{#hbs-template "postsTemplate"}}
+   \{{#each posts}}
+       <div class="row justify-content-center">
+          <div class="col-lg-12" style="margin-top:10px;"> 
+		    <div class="card card-post">
+			   <img src="\{{POST_DATA}}" class="card-img-top">
+			   <div class="card-body">
+			       <h5 class="card-title">Posted by \{{POST_AUTHOR}}</h5>
+				   <ul class="list-group">
+				      \{{#each COMMENTS}}
+					       <li class="list-group-item">\{{COMMENTS}}</li>
+					   \{{/each}}
+				   </ul>	   
+	           </div>
+			   <div class="card-footer">
+				  <div class="row">
+				     <div class="col-lg-3">
+						 <span>
+						  \{{#with VOTES}}  
+						    <i class="fa fa-thumbs-up icon-sm-2 \{{#vif VOTE_UP}} post_like \{{/vif}}" aria-hidden="true" data-index="\{{POST_ID}}"></i>
+							  \{{else}}
+							 <i class="fa fa-thumbs-up icon-sm-2" aria-hidden="true" data-index="\{{POST_ID}}"></i>
+						  \{{/with}}
+							   \{{#with VISITORS}} \{{total_likes}} \{{else}} 0 \{{/with}} 
+						 </span> 
+					 </div>
+					 <div class="col-lg-3">
+					     <span>
+						 \{{#with VOTES}} 	 
+						      <i class="fa fa-thumbs-down icon-sm-2 \{{#vif VOTE_DOWN}} post_like \{{/vif}}" aria-hidden="true" data-index="\{{POST_ID}}"></i>
+							\{{else}}
+							  <i class="fa fa-thumbs-down icon-sm-2" aria-hidden="true" data-index="\{{POST_ID}}"></i>
+					      \{{/with}} 
+							   \{{#with VISITORS}} \{{total_dislikes}} \{{else}} 0 \{{/with}} 
+						 </span>
+				  	 </div> 
+					 <div class="col-lg-3">
+				   	  	 <span><i class="fa fa-comments icon-sm-2" aria-hidden="true"></i>\{{#with VISITORS}} \{{total_comments}} \{{else}} 0 \{{/with}}</span>
+				     </div>
+					 <div class="col-lg-3">
+				         <span><i class="fa fa-users icon-sm-2" aria-hidden="true"></i>
+						 \{{#with VISITORS}} \{{total_comments}} \{{else}} 0 \{{/with}}
+						 </span>  
+					 </div>  
+				  </div>
+				  <div class="form-group">
+				    <label>Comments</label>
+					<textarea class="form-control" id="comments_\{{POST_ID}}" name="comments_\{{POST_ID}}"></textarea>
+					<button type="button" class="btn btn-primary submit_comment_action" data-index="\{{POST_ID}}">Post</button>  
+				  </div>
+			   </div>	
+		    </div>	  
+		  </div>
+	    </div>
+    \{{/each}}
+{{/hbs-template}}
+
+<!--start logout-->
+<div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header"><h4>Logout <i class="fa fa-lock"></i></h4></div>
+      <div class="modal-body"><i class="fa fa-question-circle"></i> Are you sure you want to log-off?</div>
+      <div class="modal-footer"><a href="javascript:;" class="btn btn-primary btn-block logout-action">Logout</a></div>
+    </div>
+  </div>
+</div>
+<!--end logout-->
+<!--start post model-->
+<div class="modal" id="open_post">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title text-sm-12">New Post</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body text-sm-12">
+        <form id="form_publish_post">
+		   <div class="form-group">
+			  <img class="upload_img">
+			  <input type="file" id="file" name="files[]" accept='image/*' class="form-control file-upload"> 
+		   </div>
+			<div class="form-group">
+			   <label>Tag</label>
+			   <input type="text" id="tag" name="tag" class="form-control">	
+			</div>
+			<div class="form-group">
+			   <label>Comments</label>
+				<textarea class="form-control" id="comment" name="comment"></textarea>	
+			</div>
+		</form>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary submit_post">Post</button>
+		<button type="button" class="btn btn-primary rest_post">Rest</button>  
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--end post model-->

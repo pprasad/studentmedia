@@ -1,0 +1,98 @@
+{{>templates}}
+<div class="dashboard_layout">
+   <div class="card text-white bg-dark dashboard-left-menu">
+    	<div class="card-header text-sm-12">
+			<i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;Welcome {{loginId}}</div>
+    	<div class="card-body">
+			<ul class="nav flex-column text-sm-12">
+			  <li class="nav-item">
+				 <a class="nav-link post_action" href="javascript:void(0)"><i class="fa fa-sticky-note-o" aria-hidden="true"></i>&nbsp;New Post</a>
+			  </li>
+			</ul>	
+		</div>
+    </div>
+	<div class="section_posts">
+	    
+	</div>
+</div>  
+<script>
+<!--
+	$(document).ready(()=>{
+	   var base64Image=null;
+	   loadAllPosts();
+	   $(".post_action").click((e)=>{
+		   $("#open_post").modal();
+	   }); 
+	   $(".file-upload").change((e)=>{
+		   var fileObj=event.target.files[0];
+		   $(".upload_img").attr("src",URL.createObjectURL(fileObj));
+		   var reader=new FileReader();
+		   reader.onloadend=(e)=>{
+			   base64Image=e.target.result;
+		   };
+		   reader.readAsDataURL(fileObj);
+	   });
+	   $(".submit_post").click((e)=>{
+		    var data=$("#form_publish_post").serializeJSON();
+		    data["data"]=base64Image;
+		    ajaxCall('POST',"api/publishpost",JSON.stringify(data),(resp)=>{
+				$("#open_post").modal('hide');
+				if(resp && resp.status==="success"){
+					loadAllPosts();
+				}
+				$("#form_publish_post")[0].reset();
+			},(err)=>{
+				console.log("errr",err);
+			});
+	   });
+	   $(".rest_post").click(()=>{
+		   $("#form_publish_post")[0].reset();
+	   });
+	   $(".section_posts").on("click",".submit_comment_action",(e)=>{
+		    var index=$(e.target).attr("data-index");
+		    var comments=$("#comments_"+index).val();
+		    var data=JSON.stringify({"comments":comments});
+		    ajaxCall('POST','api/publishcomments/'+index,data,(resp)=>{
+				if(resp.status=="success"){
+					$(e.target).parents(".card").find(".list-group")
+					.append('<li class="list-group-item">'+comments+'</li>');
+				}
+				$("#comments_"+index).val('');
+			},(err)=>{
+				console.log("error",err);
+			}); 
+	   }); 
+	   $(".section_posts").on("click",".fa-thumbs-up",(e)=>{
+		     var index=$(e.target).attr("data-index");
+		     var data=JSON.stringify({"voteUp":1,"voteDown":0});
+		     ajaxCall('POST','api/updateVotesByPostId/'+index,data,(resp)=>{
+				if(resp.status=="success"){
+					$(e.target).addClass("post_like");
+					$(e.target).parents(".card").find(".fa-thumbs-down")
+					.removeClass("post_like")
+				}
+				$("#comments_"+index).val('');
+			 },(err)=>{
+				console.log("error",err);
+			 });
+	   });
+	   $(".section_posts").on("click",".fa-thumbs-down",(e)=>{
+		     var index=$(e.target).attr("data-index");
+		     var data=JSON.stringify({"voteUp":0,"voteDown":1});
+		     ajaxCall('POST','api/updateVotesByPostId/'+index,data,(resp)=>{
+				if(resp.status=="success"){
+					$(e.target).addClass("post_like");
+					$(e.target).parents(".card").find(".fa-thumbs-up")
+					.removeClass("post_like")
+				}
+				$("#comments_"+index).val('');
+			 },(err)=>{
+				console.log("error",err);
+			 });
+	   });
+	   $(".logout-action").click((e)=>{
+		    $('<form action="logout"></form>').appendTo('body').submit().remove(); 
+	   });
+    });
+//-->	
+</script>
