@@ -1,0 +1,60 @@
+<form action="updateprofile" method="post" class="registration-form">
+   <label class="header_title"><i class="fa fa-user-circle-o"></i>&nbsp;My Profile</label>
+    <div class="row">
+	      <div class="col-lg-12">
+		     {{#if error}}
+			      <span class="warning"><i class="fa fa-times" aria-hidden="true"></i>{{error.message}}</span>
+	     		{{else}}
+	        	  {{#if message}}
+			         <span class="success"><i class="fa fa-check" aria-hidden="true"></i>{{message}}</span>
+			      {{/if}}
+	   	     {{/if}} 
+		  </div>
+    </div>	
+   <div class="row">
+	  <div class="col-lg-12">
+	    <input type="text" class="form-control" id="user_name" name="user_name" value="{{transform userinfo 'user_name'}}" readonly>  
+	  </div>
+   </div>
+   <div class="row">
+	  <div class="col-lg-12">
+	    <input type="text" class="form-control" id="email_id" name="email_id" value="{{transform userinfo 'email_id'}}" readonly> 
+	  </div>
+   </div>
+   <div class="row">
+	  <div class="col-lg-12">
+	    <input class="form-control" type="text" name="first_name" id="first_name" placeholder="First Name" value="{{transform userinfo 'first_name'}}" required>
+		 
+	  </div>
+   </div>	
+   <div class="row">
+	  <div class="col-lg-12">
+	    <input class="form-control" type="text" name="middle_name" id="middle_name" placeholder="Middle Name"value="{{transform userinfo 'middle_name'}}" required>
+	  </div>
+   </div>
+   <div class="row">
+	  <div class="col-lg-12">
+	    <input class="form-control" type="text" name="last_name" id="last_name" placeholder="Last Name" value="{{transform userinfo 'last_name'}}" required>
+	  </div>
+   </div>
+	<div class="row">
+	  <div class="col-lg-12">
+		<label>Gender</label>  
+	    <select class="form-control" id="gender" name="gender">
+		   
+		   <option value="Male" {{{select  userinfo 'gender' "Male"}}}>Male</option>
+		   <option value="Female" {{{select  userinfo 'gender' "Female"}}}>Female</option>
+		</select>
+	  </div>
+   </div>
+   <div class="row">
+	  <div class="col-lg-12">
+	    <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="{{transform userinfo 'mobile_no'}}"required> 
+	  </div>
+   </div>	
+   <div class="row">
+	  <div class="col-5 col-md-4">
+		 <button class="btn btn-lg btn-primary submit text-sm-12">Update</button>
+	  </div>
+  </div>	
+</form>

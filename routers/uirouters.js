@@ -32,5 +32,9 @@ Router.get('/',sessionChecker,UI_CONTROLLER.index);
 
 Router.get('/logout',UI_CONTROLLER.logout);
 
+Router.get('/myprofile',UI_CONTROLLER.myprofile);
+
+Router.post('/updateprofile',UI_CONTROLLER.updateUserDetailsByUserId);
+
 //Export all UI dependence
 module.exports=Router;

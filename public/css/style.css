@@ -215,3 +215,10 @@ footer ul{
 .post_like{
 	color: #2a3eb1;
 }
+.registration-form label{
+	color:#ffff;
+	font-size:1em;  
+}
+.registration-form select{
+	height:2em;
+}

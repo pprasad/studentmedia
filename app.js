@@ -54,6 +54,20 @@ Handlebars.registerHelper("hbs-template", function(key, options){
     '</script>';
     return ret;
 });
+Handlebars.registerHelper("transform",(obj,key,options)=>{
+	if(obj && (obj.hasOwnProperty(key.toUpperCase()))){
+	   return obj[key.toUpperCase()];
+	}else{
+	  return obj[key.toLocaleLowerCase()];  					  
+	}
+});
+
+Handlebars.registerHelper('select', function(selected,key,option) {
+    if(typeof(selected)==='object'){
+		selected=selected[key.toUpperCase()];
+	}
+    return (selected == option) ? 'selected="selected"' : '';
+});
 
 app.engine('.html', exphbs({extname: '.html',handlebars:Handlebars}));
 
