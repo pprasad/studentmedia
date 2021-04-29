@@ -8,7 +8,7 @@ exports.validateUserName=(parameters)=>{
 };
 
 exports.createUser=(parameters)=>{
-   var query=db.prepareQuery("INSERT INTO STUD_REG_USER VALUES(?,?,?,?)",parameters);
+   var query=db.prepareQuery("INSERT INTO STUD_REG_USER(EMAIL_ID,USER_NAME,PASSWORD,MOBILE_NO) VALUES(?,?,?,?)",parameters);
    return db.executeQuery(query);
 };
 

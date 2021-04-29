@@ -41,6 +41,7 @@ queryFormat=(query,parameters)=>{
 };
 
 executeQuery=(query)=>{
+	
     return new Promise((resolve,reject)=>{ 
 	  connection.query(query,(err,result)=>{
 		   if(err){

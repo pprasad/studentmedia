@@ -28,8 +28,12 @@ exports.publishpost=(req,res)=>{
 	let datetime = MOMENT().format( 'YYYY-MM-DD  HH:mm:ss.000' );
 	orm.createPost([req.body.data,req.session.user,req.body.tag,datetime])
 	.then((resp)=>{
-		console.log("Response:{}",resp);
-		res.json({status:model.STATUS_SUCCESS});
+		if(res && resp.insertId!=0){
+		    orm.createComment([req.body.comments,req.session.user,resp.insertId,datetime])
+		    res.json({status:model.STATUS_SUCCESS});
+	    }else{
+			res.json({status:model.STATUS_FAILURE,message:err});
+		}
 	}).catch((err)=>{
 	  	res.json({status:model.STATUS_FAILURE,message:err});
 	});
