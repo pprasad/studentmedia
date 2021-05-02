@@ -9,21 +9,21 @@
 				 <div class="row">
 					<div class="col-lg-3">
 							 <span>
-								<i class="fa fa-thumbs-up icon-sm-2  {{#with VOTES}} {{#vif VOTE_UP}} post_like {{/vif}} {{/with}}" aria-hidden="true" data-index="{{POST_ID}}"></i>
+								<i class="fa fa-thumbs-up  {{#with VOTES}} {{#vif VOTE_UP}} post_like {{/vif}} {{/with}}" aria-hidden="true" data-index="{{POST_ID}}"></i>
 								{{#with VISITORS}} {{total_likes}} {{else}} 0 {{/with}} 
 							 </span> 
 						 </div>
 						 <div class="col-lg-3">
 							 <span>
-								<i class="fa fa-thumbs-down icon-sm-2 {{#with VOTES}} {{#vif VOTE_DOWN}} post_like {{/vif}} {{/with}}" data-index="{{POST_ID}}" aria-hidden="true"></i>
+								<i class="fa fa-thumbs-down {{#with VOTES}} {{#vif VOTE_DOWN}} post_like {{/vif}} {{/with}}" data-index="{{POST_ID}}" aria-hidden="true"></i>
 								   {{#with VISITORS}} {{total_dislikes}} {{else}} 0 {{/with}} 
 							 </span>
 						 </div> 
 						 <div class="col-lg-3">
-							 <span><i class="fa fa-comments icon-sm-2" aria-hidden="true"></i>{{#with VISITORS}} {{total_comments}} {{else}} 0 {{/with}}</span>
+							 <span><i class="fa fa-comments" aria-hidden="true"></i>{{#with VISITORS}} {{total_comments}} {{else}} 0 {{/with}}</span>
 						 </div>
 						 <div class="col-lg-3">
-							 <span><i class="fa fa-users icon-sm-2" aria-hidden="true"></i>
+							 <span><i class="fa fa-users" aria-hidden="true"></i>
 							 {{#with VISITORS}} {{total_comments}} {{else}} 0 {{/with}}
 							 </span>  
 						 </div> 	  
