@@ -17,12 +17,12 @@ exports.search=(req,res)=>{
 						 posts.push(obj[key]);
 					});
 			});
-			res.render("search",{data:posts});
+			res.render("search",{loginId:req.session.user,data:posts});
 		}).catch((err)=>{
-            res.render("search",{error:err.sqlMessage});
+            res.render("search",{loginId:req.session.user,error:err.sqlMessage});
 		});
     }else{
-		res.render("search",{});
+		res.render("search",{loginId:req.session.user});
 	}
 }
 /*

@@ -28,8 +28,8 @@ exports.createPost=(parameters)=>{
 };
 
 exports.findAllPosts=(parameters)=>{
-  var query="SELECT json_object('POST_ID',P.POST_ID,'POST_DATA',P.POST_DATA,'POST_AUTHOR',P.POST_AUTHOR,'POST_TAG',P.POST_TAG,'CREATE_DATE',P.CREATE_DATE,'COMMENTS',(SELECT json_arrayagg(json_object('COMMENTS',C.COMMENTS))";
-  query+=" FROM STUD_COMMENTS C WHERE c.POST_id=P.POST_Id),'VOTES',(SELECT  json_object('VOTE_UP',VOTE_UP,'VOTE_DOWN',VOTE_DOWN) FROM STUD_POST_LIKES where POST_ID=P.POST_ID AND USER_ID=?),'VISITORS',(SELECT json_object('total_likes',total_likes,'total_dislikes',total_dislikes,'total_comments',TOTAL_COMMENTS) FROM ((SELECT count(vote_up) total_likes FROM STUD_POST_LIKES WHERE vote_up=1 AND POST_ID=P.POST_ID) vote_up,(SELECT count(vote_down) total_dislikes from STUD_POST_LIKES WHERE vote_down=1 AND POST_ID=P.POST_ID) vote_down,(SELECT COUNT(*) TOTAL_COMMENTS FROM STUD_COMMENTS WHERE POST_ID=P.POST_ID) tab_comments)))  FROM STUD_POST P";
+  var query="SELECT json_object('POST_ID',P.POST_ID,'POST_DATA',P.POST_DATA,'POST_AUTHOR',P.POST_AUTHOR,'POST_TAG',P.POST_TAG,'CREATE_DATE',date_format(P.CREATE_DATE,'%d-%m-%Y'),'COMMENTS',(SELECT json_arrayagg(json_object('COMMENTS',C.COMMENTS))";
+  query+=" FROM STUD_COMMENTS C WHERE c.POST_id=P.POST_Id),'VOTES',(SELECT  json_object('VOTE_UP',VOTE_UP,'VOTE_DOWN',VOTE_DOWN) FROM STUD_POST_LIKES where POST_ID=P.POST_ID AND USER_ID=?),'VISITORS',(SELECT json_object('total_likes',total_likes,'total_dislikes',total_dislikes,'total_comments',TOTAL_COMMENTS) FROM ((SELECT count(vote_up) total_likes FROM STUD_POST_LIKES WHERE vote_up=1 AND POST_ID=P.POST_ID) vote_up,(SELECT count(vote_down) total_dislikes from STUD_POST_LIKES WHERE vote_down=1 AND POST_ID=P.POST_ID) vote_down,(SELECT COUNT(*) TOTAL_COMMENTS FROM STUD_COMMENTS WHERE POST_ID=P.POST_ID) tab_comments)))  FROM STUD_POST P ORDER BY P.CREATE_DATE DESC";
   query=db.prepareQuery(query,parameters);	
   return db.executeQuery(query);	
 };
@@ -51,18 +51,19 @@ exports.insertVote=(parameters)=>{
 
 exports.updateVote=(parameters)=>{
 	var query=db.prepareQuery("UPDATE STUD_POST_LIKES SET VOTE_UP=?,VOTE_DOWN=? WHERE POST_ID=? AND USER_ID=?",parameters);
+	return db.executeQuery(query);
 	
 };
 
 exports.fetchAllPosts=()=>{
-  var query="SELECT json_object('POST_ID',P.POST_ID,'POST_DATA',P.POST_DATA,'POST_AUTHOR',P.POST_AUTHOR,'POST_TAG',P.POST_TAG,'CREATE_DATE',P.CREATE_DATE,'COMMENTS',(SELECT json_arrayagg(json_object('COMMENTS',C.COMMENTS))";
-  query+=" FROM STUD_COMMENTS C WHERE c.POST_id=P.POST_Id),'VOTES',(SELECT  json_object('VOTE_UP',VOTE_UP,'VOTE_DOWN',VOTE_DOWN) FROM STUD_POST_LIKES where POST_ID=P.POST_ID),'VISITORS',(SELECT json_object('total_likes',total_likes,'total_dislikes',total_dislikes,'total_comments',TOTAL_COMMENTS) FROM ((SELECT count(vote_up) total_likes FROM STUD_POST_LIKES WHERE vote_up=1 AND POST_ID=P.POST_ID) vote_up,(SELECT count(vote_down) total_dislikes from STUD_POST_LIKES WHERE vote_down=1 AND POST_ID=P.POST_ID) vote_down,(SELECT COUNT(*) TOTAL_COMMENTS FROM STUD_COMMENTS WHERE POST_ID=P.POST_ID) tab_comments)))  FROM STUD_POST P";
+  var query="SELECT json_object('POST_ID',P.POST_ID,'POST_DATA',P.POST_DATA,'POST_AUTHOR',P.POST_AUTHOR,'POST_TAG',P.POST_TAG,'CREATE_DATE',date_format(P.CREATE_DATE,'%d-%m-%Y'),'COMMENTS',(SELECT json_arrayagg(json_object('COMMENTS',C.COMMENTS))";
+  query+=" FROM STUD_COMMENTS C WHERE c.POST_id=P.POST_Id),'VOTES',(SELECT  json_object('VOTE_UP',VOTE_UP,'VOTE_DOWN',VOTE_DOWN) FROM STUD_POST_LIKES where POST_ID=P.POST_ID),'VISITORS',(SELECT json_object('total_likes',total_likes,'total_dislikes',total_dislikes,'total_comments',TOTAL_COMMENTS) FROM ((SELECT count(vote_up) total_likes FROM STUD_POST_LIKES WHERE vote_up=1 AND POST_ID=P.POST_ID) vote_up,(SELECT count(vote_down) total_dislikes from STUD_POST_LIKES WHERE vote_down=1 AND POST_ID=P.POST_ID) vote_down,(SELECT COUNT(*) TOTAL_COMMENTS FROM STUD_COMMENTS WHERE POST_ID=P.POST_ID) tab_comments)))  FROM STUD_POST P ORDER BY P.CREATE_DATE DESC";
   query=db.prepareQuery(query,null);	
   return db.executeQuery(query);	
 };
 
 exports.fetchAllPostsByTag=(parameter)=>{
-  var query="SELECT json_object('POST_ID',P.POST_ID,'POST_DATA',P.POST_DATA,'POST_AUTHOR',P.POST_AUTHOR,'POST_TAG',P.POST_TAG,'CREATE_DATE',P.CREATE_DATE,'COMMENTS',(SELECT json_arrayagg(json_object('COMMENTS',C.COMMENTS))";
+  var query="SELECT json_object('POST_ID',P.POST_ID,'POST_DATA',P.POST_DATA,'POST_AUTHOR',P.POST_AUTHOR,'POST_TAG',P.POST_TAG,'CREATE_DATE',date_format(P.CREATE_DATE,'%d-%m-%Y'),'COMMENTS',(SELECT json_arrayagg(json_object('COMMENTS',C.COMMENTS))";
   query+=" FROM STUD_COMMENTS C WHERE c.POST_id=P.POST_Id),'VOTES',(SELECT  json_object('VOTE_UP',VOTE_UP,'VOTE_DOWN',VOTE_DOWN) FROM STUD_POST_LIKES where POST_ID=P.POST_ID),'VISITORS',(SELECT json_object('total_likes',total_likes,'total_dislikes',total_dislikes,'total_comments',TOTAL_COMMENTS) FROM ((SELECT count(vote_up) total_likes FROM STUD_POST_LIKES WHERE vote_up=1 AND POST_ID=P.POST_ID) vote_up,(SELECT count(vote_down) total_dislikes from STUD_POST_LIKES WHERE vote_down=1 AND POST_ID=P.POST_ID) vote_down,(SELECT COUNT(*) TOTAL_COMMENTS FROM STUD_COMMENTS WHERE POST_ID=P.POST_ID) tab_comments)))  FROM STUD_POST P WHERE P.POST_TAG LIKE ?";
   query=db.prepareQuery(query,parameter);	
   return db.executeQuery(query);	

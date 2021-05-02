@@ -8,7 +8,7 @@ const model=require("../config/model");
 exports.isValidUsername=(req,res)=>{
 	var respObj=Object.assign({},model.response);
 	respObj.status=model.STATUS_SUCCESS;
-	orm.validateUserName([req.query.username])
+	orm.validateUserName([req.params.username])
 	.then((resp)=>{
 		 if(resp.length!=0){
 			respObj.status=model.STATUS_FAILURE;

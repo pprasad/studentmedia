@@ -26,9 +26,9 @@ var isValidEmail=(val)=>{
    }	
 };
 var addError=(id,msg)=>{
-	$(id).css("border-right","9px solid red");
 	var errorId=id.replaceAll("#",'')+"_error";
 	$(id+"_error").remove();
+	$(id).addClass("error_tag");
 	var posy=$(id).offset().top-$(id).outerHeight()/6;
 	var posx=$(window).width()-$(id).offset().left;
 	var errorObj=$(errorMsg).attr("id",errorId);
@@ -37,7 +37,7 @@ var addError=(id,msg)=>{
 	$(id+"_error .tooltip-inner").html(msg);
 };
 var removeError=(id)=>{
-	$(id).css("border-right","none");
+	$(id).removeClass("error_tag");
 	$(id+"_error").remove();
 }
 var ajaxCall=(method,url,data,successCallback,errCallback)=>{

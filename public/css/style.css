@@ -222,3 +222,6 @@ footer ul{
 .registration-form select{
 	height:2em;
 }
+.error_tag{
+	border-right: 9px solid red;
+}

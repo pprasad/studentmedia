@@ -62,6 +62,14 @@ Handlebars.registerHelper("transform",(obj,key,options)=>{
 	}
 });
 
+Handlebars.registerHelper('vif', function (value, options) {
+    if(value===1) {
+        return options.fn(this);
+     }else{
+        return options.inverse(this);
+     }
+});
+
 Handlebars.registerHelper('select', function(selected,key,option) {
     if(typeof(selected)==='object'){
 		selected=selected[key.toUpperCase()];

@@ -6,6 +6,7 @@
 			   <img src="\{{POST_DATA}}" class="card-img-top">
 			   <div class="card-body">
 			       <h5 class="card-title">Posted by \{{POST_AUTHOR}}</h5>
+				   <h5 class="card-title">Posted Date \{{CREATE_DATE}}</h5>
 				   <ul class="list-group">
 				      \{{#each COMMENTS}}
 					       <li class="list-group-item">\{{COMMENTS}}</li>
@@ -16,21 +17,14 @@
 				  <div class="row">
 				     <div class="col-lg-3">
 						 <span>
-						  \{{#with VOTES}}  
-						    <i class="fa fa-thumbs-up icon-sm-2 \{{#vif VOTE_UP}} post_like \{{/vif}}" aria-hidden="true" data-index="\{{POST_ID}}"></i>
-							  \{{else}}
-							 <i class="fa fa-thumbs-up icon-sm-2" aria-hidden="true" data-index="\{{POST_ID}}"></i>
-						  \{{/with}}
-							   \{{#with VISITORS}} \{{total_likes}} \{{else}} 0 \{{/with}} 
+						   
+						    <i class="fa fa-thumbs-up icon-sm-2  \{{#with VOTES}} \{{#vif VOTE_UP}} post_like \{{/vif}} \{{/with}}" aria-hidden="true" data-index="\{{POST_ID}}"></i>
+					 	    \{{#with VISITORS}} \{{total_likes}} \{{else}} 0 \{{/with}} 
 						 </span> 
 					 </div>
 					 <div class="col-lg-3">
 					     <span>
-						 \{{#with VOTES}} 	 
-						      <i class="fa fa-thumbs-down icon-sm-2 \{{#vif VOTE_DOWN}} post_like \{{/vif}}" aria-hidden="true" data-index="\{{POST_ID}}"></i>
-							\{{else}}
-							  <i class="fa fa-thumbs-down icon-sm-2" aria-hidden="true" data-index="\{{POST_ID}}"></i>
-					      \{{/with}} 
+						    <i class="fa fa-thumbs-down icon-sm-2 \{{#with VOTES}} \{{#vif VOTE_DOWN}} post_like \{{/vif}} \{{/with}}" data-index="\{{POST_ID}}" aria-hidden="true"></i>
 							   \{{#with VISITORS}} \{{total_dislikes}} \{{else}} 0 \{{/with}} 
 						 </span>
 				  	 </div> 

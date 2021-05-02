@@ -4,6 +4,7 @@
 	   {{>headers}}
    </head>
    <body>
+	  {{>templates}} 
 	  <header>
 	     <nav id="navbar_top" class="navbar-fixed-top navbar navbar-expand-lg navbar-dark bg-primary">
 		 <div class="container-fluid">
@@ -48,6 +49,17 @@
 		</ul> 
 	  </footer> 
 	  <script src="js/handlebars.min.js"></script>
-  	  <script type="text/javascript" src="js/validator.js"></script>  
-   </body>
+  	  <script type="text/javascript" src="js/validator.js"></script>
+	  {{#if loginId}}
+			<script type="text/javascript">
+			<!--
+			  $(document).ready(()=>{	
+				   $(".logout-action").click((e)=>{
+						$('<form action="logout"></form>').appendTo('body').submit().remove(); 
+				   });
+			  });
+			//-->	
+			</script>
+	   {{/if}}
+	</body>
 </html>

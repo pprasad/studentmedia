@@ -79,6 +79,7 @@
 	   $(".section_posts").on("click",".fa-thumbs-down",(e)=>{
 		     var index=$(e.target).attr("data-index");
 		     var data=JSON.stringify({"voteUp":0,"voteDown":1});
+		      console.log("index:{}",index);
 		     ajaxCall('POST','api/updateVotesByPostId/'+index,data,(resp)=>{
 				if(resp.status=="success"){
 					$(e.target).addClass("post_like");
@@ -89,9 +90,6 @@
 			 },(err)=>{
 				console.log("error",err);
 			 });
-	   });
-	   $(".logout-action").click((e)=>{
-		    $('<form action="logout"></form>').appendTo('body').submit().remove(); 
 	   });
     });
 //-->	

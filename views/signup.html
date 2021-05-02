@@ -65,6 +65,28 @@
 			   removeError("#retype_password");
 		  }
 	  });
+	  
+	  $("#user_name").blur((e)=>{
+		  var val=e.target.value;
+		   console.log("Username:{}",val);
+		   ajaxCall('GET','api/validate/'+val,null,(resp)=>{
+			   if(resp && resp.status==="failure"){
+				    addError("#user_name",resp.message);
+			   }else{
+				    removeError("#user_name");
+			   }
+		   },(err)=>{
+			   
+		   })
+	  });
+	
+	$(".registration-form").submit((e)=>{
+		var errorObjs=$(".registration-form").find(".error_tag");
+		if(errorObjs && errorObjs.length!=0){
+			e.preventDefault();
+			return false;
+		}
+	});
 });
 //-->	
 </script>

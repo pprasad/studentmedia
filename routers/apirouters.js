@@ -4,7 +4,7 @@ const Router=express.Router();
 
 const API_CONTROLER=require("../controller/apicontroller");
 
-Router.get("/username",API_CONTROLER.isValidUsername);
+Router.get("/validate/:username",API_CONTROLER.isValidUsername);
 
 Router.post("/publishpost",API_CONTROLER.publishpost);
 
